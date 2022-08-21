@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'text-editor';
+  public status!: boolean;
+  public config!: any;
+  constructor(){}
+  getConfig(data: any): void {
+    this.config = data;
+  }
 }

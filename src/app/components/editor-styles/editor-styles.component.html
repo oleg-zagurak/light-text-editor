@@ -1,0 +1,94 @@
+<div class="wrapper">
+    <form #form="ngForm" (change)="setChanges(form.value)">
+        <div class="radio form-group">
+            <span>Text size:</span>
+            <div class="form-check-inline form-check">
+                <input type="radio" name="size" value="12" id="12" class="form-check-input" ngModel="12">
+                <label for="12" class="form-check-label">12 pt</label>
+            </div>
+            <div class="form-check-inline form-check">
+                <input type="radio" name="size" value="14" id="14" class="form-check-input" ngModel="12">
+                <label for="14" class="form-check-label">14 pt</label>
+            </div>
+            <div class="form-check-inline form-check">
+                <input type="radio" name="size" value="16" id="16" class="form-check-input" ngModel="12">
+                <label for="16" class="form-check-label">16 pt</label>
+            </div>
+            <div class="form-check-inline form-check">
+                <input type="radio" name="size" value="18" id="18" class="form-check-input" ngModel="12">
+                <label for="18" class="form-check-label">18 pt</label>
+            </div>
+            <div class="form-check-inline form-check">
+                <input type="radio" name="size" value="20" id="20" class="form-check-input" ngModel="12">
+                <label for="20" class="form-check-label">20 pt</label>
+            </div>
+        </div>
+        <div class="font form-group">
+            <span>Font family:</span>
+            <select name="font" class="form-select" ngModel>
+                <option value="" disabled selected>Select font</option>
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Lucida Console">Lucida Console</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Sylfaen">Sylfaen</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Tahoma">Tahoma</option>
+            </select>
+        </div>
+        <div class="buttons form-group">
+            <button class="btn" (click)="showColor()">Color</button>
+            <button class="btn" (click)="showBgColor()">BgColor</button>
+            <div class="colors">
+                <ng-template [ngIf]="color">
+                    <table (click)="getColor($event, 'color')">
+                        <tr>
+                            <td class="cell" data-color="red" style="background-color: red;"></td>
+                            <td class="cell" data-color="blue" style="background-color: blue;"></td>
+                            <td class="cell" data-color="green" style="background-color: green;"></td>
+                        </tr>
+                        <tr>
+                            <td class="cell" data-color="violet" style="background-color: violet;"></td>
+                            <td class="cell" data-color="seagreen" style="background-color: seagreen;"></td>
+                            <td class="cell" data-color="lightgray" style="background-color: lightgray;"></td>
+                        </tr>
+                        <tr>
+                            <td class="cell" data-color="lightblue" style="background-color: lightblue;"></td>
+                            <td class="cell" data-color="lightgoldenrodyellow" style="background-color: lightgoldenrodyellow;"></td>
+                            <td class="cell" data-color="lightpink" style="background-color: lightpink;"></td>
+                        </tr>
+                    </table>
+                </ng-template>
+                <ng-template [ngIf]="bgColor">
+                    <table (click)="getColor($event, 'bg')">
+                        <tr>
+                            <td class="cell" data-color="darkviolet" style="background-color: darkviolet;"></td>
+                            <td class="cell" data-color="greenyellow" style="background-color: greenyellow;"></td>
+                            <td class="cell" data-color="darkgray" style="background-color: darkgray;"></td>
+                        </tr>
+                        <tr>
+                            <td class="cell" data-color="goldenrod" style="background-color: goldenrod;"></td>
+                            <td class="cell" data-color="rosybrown" style="background-color: rosybrown;"></td>
+                            <td class="cell" data-color="burlywood" style="background-color: burlywood;"></td>
+                        </tr>
+                        <tr>
+                            <td class="cell" data-color="lightcoral" style="background-color: lightcoral;"></td>
+                            <td class="cell" data-color="lightgreen" style="background-color: lightgreen;"></td>
+                            <td class="cell" data-color="pink" style="background-color: pink;"></td>
+                        </tr>
+                    </table>
+                </ng-template>
+            </div>
+        </div>
+        <div class="config form-group">
+            <div class="form-check-inline form-check">
+                <input class="form-check-input" type="checkbox" name="bold" id="bold" ngModel>
+                <label for="bold" class="form-check-label">Bold text</label>
+            </div>
+            <div class="form-check-inline form-check">
+                <input class="form-check-input" type="checkbox" name="italic" id="italic" ngModel>
+                <label for="italic" class="form-check-label">Italic text</label>
+            </div>
+        </div>
+    </form>
+</div>

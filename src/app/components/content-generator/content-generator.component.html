@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="wrapper">
+        <div class="choose-block">
+            <p class="title">Choose what to add:</p>
+            <form class="select-type" #type="ngForm">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="item-type" id="inlineRadio1" value="true"
+                        ngModel="true" checked>
+                    <label class="form-check-label" for="inlineRadio1">Table</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="item-type" id="inlineRadio2" value=""
+                        ngModel="true">
+                    <label class="form-check-label" for="inlineRadio2">List</label>
+                </div>
+            </form>
+        </div>
+        <ng-template [ngIf]="type.value['item-type']" [ngIfElse]="list">
+            <form class="table-block" #table="ngForm">
+                <div class="block-item">
+                    <div class="raw">
+                        <span>Input count of raw: </span><input type="number" min="1" class="input" name="raws" ngModel>
+                    </div>
+                    <div class="raw">
+                        <span>Input count of cell: </span><input type="number" min="1" class="input" name="cells"
+                            ngModel>
+                    </div>
+                </div>
+                <div class="block-item">
+                    <div class="sub-title">
+                        <p>Table style:</p>
+                    </div>
+                    <div class="raw">
+                        <span>Input width of cell: </span><input type="number" min="1" class="input" name="width"
+                            ngModel>
+                    </div>
+                    <div class="raw">
+                        <span>Input height of cell: </span><input type="number" min="1" class="input" name="height"
+                            ngModel>
+                    </div>
+                    <div class="raw style-block">
+                        <div class="item">
+                            <span>Border width: </span><input type="number" min="0" class="input" name="borderW"
+                                ngModel>
+                        </div>
+                        <div class="item">
+                            <span>Border type: </span>
+                            <select name="borderT" class="select-item" ngModel="solid">
+                                <option value="solid">solid</option>
+                                <option value="dotted">dotted</option>
+                                <option value="dashed">dashed</option>
+                                <option value="double">double</option>
+                                <option value="groove">groove</option>
+                                <option value="ridge">ridge</option>
+                                <option value="inset">inset</option>
+                                <option value="outset">outset</option>
+                            </select>
+                        </div>
+                        <div class="item">
+                            <span>Border color: </span>
+                            <select name="borderC" class="select-item" ngModel="black">
+                                <option value="black">black</option>
+                                <option value="red">red</option>
+                                <option value="blue">blue</option>
+                                <option value="green">green</option>
+                                <option value="violet">violet</option>
+                                <option value="gray">gray</option>
+                                <option value="yellow">yellow</option>
+                                <option value="orange">orange</option>
+                                <option value="coral">coral</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn" type="button" (click)="validate(table.value, 'table')">Create</button>
+                </div>
+            </form>
+        </ng-template>
+        <ng-template #list>
+            <form #createList="ngForm">
+                <div class="block-item">
+                    <div class="raw">
+                        <span>Input count of list item: </span><input type="number" min="1" class="input" name="amount"
+                            ngModel>
+                    </div>
+                    <div class="item">
+                        <span>Type of mark: </span>
+                        <select name="type" class="select-item" ngModel="disc">
+                            <option value="disc">disc</option>
+                            <option value="circle">circle</option>
+                            <option value="square">square</option>
+                            <option value="decimal">decimal</option>
+                            <option value="georgian">georgian</option>
+                            <option value="kannada">kannada</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" type="button" (click)="validate(createList.value, 'list')">Create</button>
+            </form>
+        </ng-template>
+    </div>
+</div>

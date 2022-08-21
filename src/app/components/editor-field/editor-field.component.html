@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="wrapper">
+        <div [style.visibility]="editStatus ? 'visible' : 'hidden'">
+            <textarea #area class="area" name="" id="" [value]="text" (input)="setValue(area.value)"></textarea>
+            <div class="buttons">
+                <button class="btn" (click)="save(area.value)">Save</button>
+                <button class="btn" (click)=" editable ? generator = !generator : null">Add</button>
+            </div>
+        </div>
+        <app-editor-styles [style.visibility]="styleStatus ? 'visible' : 'hidden'"></app-editor-styles>
+    </div>
+</div>
+<app-content-generator *ngIf="generator" (close)="generator = !generator" (create)="add($event)"></app-content-generator>
