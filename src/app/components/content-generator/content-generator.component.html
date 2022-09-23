@@ -1,101 +1,153 @@
-<div class="container">
-    <div class="wrapper">
-        <div class="choose-block">
-            <p class="title">Choose what to add:</p>
-            <form class="select-type" #type="ngForm">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="item-type" id="inlineRadio1" value="true"
-                        ngModel="true" checked>
-                    <label class="form-check-label" for="inlineRadio1">Table</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="item-type" id="inlineRadio2" value=""
-                        ngModel="true">
-                    <label class="form-check-label" for="inlineRadio2">List</label>
-                </div>
-            </form>
+<div class="wrapper">
+    <p class="title">Що додамо?</p>
+    <div class="choose-block">
+        <div class="buttons">
+            <button (click)="setActive(true)" class="tabs first" [class.active]="activeTab">Таблиця</button>
+            <button (click)="setActive(false)" class="tabs other" [class.active]="!activeTab">Список</button>
         </div>
-        <ng-template [ngIf]="type.value['item-type']" [ngIfElse]="list">
-            <form class="table-block" #table="ngForm">
-                <div class="block-item">
+    </div>
+    <div class="container">
+        <ng-template [ngIf]="active" [ngIfElse]="list">
+            <form class="table-block" #table="ngForm" ngNativeValidate (change)="table.valid ? setTableData(table.value):
+            setInvalid()">
+                <fieldset class="block-item">
+                    <legend>Ширина і висота комірки таблиці</legend>
                     <div class="raw">
-                        <span>Input count of raw: </span><input type="number" min="1" class="input" name="raws" ngModel>
-                    </div>
-                    <div class="raw">
-                        <span>Input count of cell: </span><input type="number" min="1" class="input" name="cells"
-                            ngModel>
-                    </div>
-                </div>
-                <div class="block-item">
-                    <div class="sub-title">
-                        <p>Table style:</p>
-                    </div>
-                    <div class="raw">
-                        <span>Input width of cell: </span><input type="number" min="1" class="input" name="width"
-                            ngModel>
-                    </div>
-                    <div class="raw">
-                        <span>Input height of cell: </span><input type="number" min="1" class="input" name="height"
-                            ngModel>
-                    </div>
-                    <div class="raw style-block">
-                        <div class="item">
-                            <span>Border width: </span><input type="number" min="0" class="input" name="borderW"
-                                ngModel>
-                        </div>
-                        <div class="item">
-                            <span>Border type: </span>
-                            <select name="borderT" class="select-item" ngModel="solid">
-                                <option value="solid">solid</option>
-                                <option value="dotted">dotted</option>
-                                <option value="dashed">dashed</option>
-                                <option value="double">double</option>
-                                <option value="groove">groove</option>
-                                <option value="ridge">ridge</option>
-                                <option value="inset">inset</option>
-                                <option value="outset">outset</option>
-                            </select>
-                        </div>
-                        <div class="item">
-                            <span>Border color: </span>
-                            <select name="borderC" class="select-item" ngModel="black">
-                                <option value="black">black</option>
-                                <option value="red">red</option>
-                                <option value="blue">blue</option>
-                                <option value="green">green</option>
-                                <option value="violet">violet</option>
-                                <option value="gray">gray</option>
-                                <option value="yellow">yellow</option>
-                                <option value="orange">orange</option>
-                                <option value="coral">coral</option>
-                            </select>
+                        <span>Ширина </span>
+                        <div class="input-box">
+                            <app-hint *ngIf="widthM.invalid && widthM.dirty" class="hint"></app-hint>
+                            <input #widthM="ngModel" min="1" required="" max="99" type="number" min="1" class="input"
+                                name="width" ngModel [class.empty]="emptyTableField">
                         </div>
                     </div>
-                    <button class="btn" type="button" (click)="validate(table.value, 'table')">Create</button>
+                    <div class="raw">
+                        <span>Висота </span>
+                        <div class="input-box">
+                            <app-hint *ngIf="height.invalid && height.dirty" class="hint"></app-hint>
+                            <input #height="ngModel" type="number" required="" min="1" max="99" class="input"
+                                name="height" ngModel [class.empty]="emptyTableField">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="block-item">
+                    <legend>Товщина, колір, тип лінії таблиці</legend>
+                    <div class="raw">
+                        <span>Товщина </span>
+                        <div class="input-box">
+                            <app-hint *ngIf="thickness.dirty && thickness.invalid" class="hint"></app-hint>
+                            <input #thickness="ngModel" type="number" min="1" max="99" required="" class="input"
+                                name="borderWidth" ngModel [class.empty]="emptyTableField">
+                        </div>
+                    </div>
+                    <div class="raw">
+                        <span>Тип лінії </span>
+                        <select name="borderType" class="select-item" ngModel="solid">
+                            <option value="solid">solid</option>
+                            <option value="dotted">dotted</option>
+                            <option value="dashed">dashed</option>
+                            <option value="double">double</option>
+                            <option value="groove">groove</option>
+                            <option value="ridge">ridge</option>
+                            <option value="inset">inset</option>
+                            <option value="outset">outset</option>
+                        </select>
+                    </div>
+                    <div class="raw">
+                        <span>Колір </span>
+                        <app-select-color (changeColor)="setTableColor($event)" [currentColor]="tableColor"
+                            [inputColorsList]="tableColorsList">
+                        </app-select-color>
+                    </div>
+                </fieldset>
+                <fieldset class="block-item">
+                    <legend>Кількість рядків і стовпців</legend>
+                    <div class="raw">
+                        <span>Кількість стовпців</span>
+                        <div class="input-box">
+                            <app-hint *ngIf="column.dirty && column.invalid" class="hint"></app-hint>
+                            <input #column="ngModel" type="number" min="1" max="99" required="" name="columns"
+                                class="input" ngModel [class.empty]="emptyTableField">
+                        </div>
+                    </div>
+                    <div class="raw">
+                        <span>Кількість рядків</span>
+                        <div class="input-box">
+                            <app-hint *ngIf="raws.dirty && raws.invalid" class="hint"></app-hint>
+                            <input #raws="ngModel" type="number" min="1" max="99" required="" name="raws" class="input"
+                                ngModel [class.empty]="emptyTableField">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="block-btn">
+                    <app-button [style.visibility]="table.valid ? 'visible' : 'hidden'" class="btn" type="button"
+                        (click)="addTable(table.value)">Додати</app-button>
                 </div>
             </form>
         </ng-template>
         <ng-template #list>
-            <form #createList="ngForm">
-                <div class="block-item">
+            <form #listBuilder="ngForm" ngNativeValidate (change)="listBuilder.valid ? setListData(listBuilder.value):
+            setInvalid()">
+                <fieldset class="block-item">
+                    <legend>Тип списку</legend>
                     <div class="raw">
-                        <span>Input count of list item: </span><input type="number" min="1" class="input" name="amount"
-                            ngModel>
+                        <label for="number">Нумерований</label>
+                        <input type="radio" id="number" [value]="'number'" name="typeOfList" required="" ngModel>
                     </div>
-                    <div class="item">
-                        <span>Type of mark: </span>
-                        <select name="type" class="select-item" ngModel="disc">
-                            <option value="disc">disc</option>
-                            <option value="circle">circle</option>
-                            <option value="square">square</option>
-                            <option value="decimal">decimal</option>
-                            <option value="georgian">georgian</option>
-                            <option value="kannada">kannada</option>
-                        </select>
+                    <div class="raw">
+                        <label for="mark">Маркований</label>
+                        <input type="radio" id="mark" [value]="'mark'" name="typeOfList" ngModel>
                     </div>
-                </div>
-                <button class="btn" type="button" (click)="validate(createList.value, 'list')">Create</button>
+                </fieldset>
+                <ng-template [ngIf]="listBuilder.value.typeOfList === 'number'">
+                    <fieldset class="block-item">
+                        <legend>Параметри списку</legend>
+                        <div class="raw">
+                            <span>Кількість елементів</span>
+                            <div class="input-box">
+                                <app-hint *ngIf="amount.invalid && amount.dirty" class="hint"></app-hint>
+                                <input #amount="ngModel" min="1" required="" max="99" type="number" class="input"
+                                    name="amount" ngModel [class.empty]="emptyListField">
+                            </div>
+                        </div>
+                        <div class="raw">
+                            <span>Тип маркування</span>
+                            <select name="type" class="select-item" ngModel="1">
+                                <option value="1">Арабські цифри</option>
+                                <option value="I">Римські цифри</option>
+                                <option value="A">Букви</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </ng-template>
+                <ng-template [ngIf]="listBuilder.value.typeOfList === 'mark'">
+                    <fieldset class="block-item">
+                        <legend>Параметри списку</legend>
+                        <div class="raw">
+                            <span>Кількість елементів</span>
+                            <div class="input-box">
+                                <app-hint *ngIf="amount.invalid && amount.dirty" class="hint"></app-hint>
+                                <input #amount="ngModel" min="1" required="" max="99" type="number" class="input"
+                                    name="amount" ngModel [class.empty]="emptyListField">
+                            </div>
+                        </div>
+                        <div class="raw">
+                            <span>Тип маркування</span>
+                            <select name="type" class="select-item" ngModel="disc">
+                                <option value="disc">Диск</option>
+                                <option value="circle">Круг</option>
+                                <option value="square">Квадрат</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </ng-template>
             </form>
+            <div class="block-btn">
+                <app-button class="btn" [style.visibility]="listBuilder.valid ? 'visible' : 'hidden'" type="button"
+                    (click)="addList(listBuilder.value)">
+                    Додати
+                </app-button>
+            </div>
         </ng-template>
     </div>
+    <app-example [data]="invalid === true ? createTable() : invalid === false ? createList() : ''"></app-example>
 </div>

@@ -7,10 +7,10 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 })
 export class ToolsControllerComponent implements OnInit {
   @Input() status: boolean = true;
-  @Output('message') config: EventEmitter<any> = new EventEmitter<any>()
+  @Output('message') config: EventEmitter<any> = new EventEmitter<any>();
+  @Output('lock') lockState: EventEmitter<void> = new EventEmitter<void>();
   public styleStatus: boolean = false;
   public editStatus: boolean = false;
-  public editable: boolean = false;
   constructor() { }
   ngOnInit(): void {
   }
@@ -18,12 +18,14 @@ export class ToolsControllerComponent implements OnInit {
     if (name === 's') {
       this.styleStatus = true;
       this.editStatus = false;
-      this.config.emit([this.editStatus, this.styleStatus, this.editable])
+      this.config.emit([this.editStatus, this.styleStatus])
     } else {
       this.editStatus = true;
-      this.editable = true;
       this.styleStatus = false;
-      this.config.emit([this.editStatus, this.styleStatus, this.editable])
+      this.config.emit([this.editStatus, this.styleStatus])
     }
+  }
+  lock(){
+    this.lockState.emit();
   }
 }

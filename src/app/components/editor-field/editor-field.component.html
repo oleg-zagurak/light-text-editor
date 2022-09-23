@@ -1,13 +1,27 @@
-<div class="container">
-    <div class="wrapper">
-        <div [style.visibility]="editStatus ? 'visible' : 'hidden'">
-            <textarea #area class="area" name="" id="" [value]="text" (input)="setValue(area.value)"></textarea>
-            <div class="buttons">
-                <button class="btn" (click)="save(area.value)">Save</button>
-                <button class="btn" (click)=" editable ? generator = !generator : null">Add</button>
+<div class="wrapper" *ngIf="editStatus || styleStatus">
+    <div class="editable" *ngIf="generatorStatus && editStatus">
+        <div class="main-block">
+            <div class="tags" (click)="addTemplate($event)">
+                <button data-type="1">p</button>
+                <button data-type="2">h1</button>
+                <button data-type="3">h2</button>
+                <button data-type="4">h3</button>
+                <button data-type="5">h4</button>
+                <button data-type="6">h5</button>
+                <button data-type="7">h6</button>
+                <button data-type="8">a</button>
             </div>
+            <textarea #area class="area" name="" id="" [value]="text" (input)="setValue(area.value)">
+            </textarea>
         </div>
-        <app-editor-styles [style.visibility]="styleStatus ? 'visible' : 'hidden'"></app-editor-styles>
+        <div class="buttons">
+            <app-button class="btn" (click)="save(area.value)">Зберегти</app-button>
+            <app-button class="btn" (click)=" generator = !generator;
+            generatorStatus = !generatorStatus">Додати</app-button>
+        </div>
     </div>
+    <app-editor-styles *ngIf="styleStatus && generatorStatus"></app-editor-styles>
+    <app-content-generator *ngIf="generator" (close)="generator = !generator; generatorStatus = !generatorStatus"
+        (create)="add($event)">
+    </app-content-generator>
 </div>
-<app-content-generator *ngIf="generator" (close)="generator = !generator" (create)="add($event)"></app-content-generator>

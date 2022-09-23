@@ -1,0 +1,7 @@
+<div class="wrapper">
+    <div class="lock-box">
+        <div class="title">Програму заблоковано. Введіть пароль</div>
+        <input type="text" #input [class.wrong]="wrong" (input)="wrong = false">
+        <app-button (click)="unlock(input.value)">Розблокувати</app-button>
+    </div>
+</div>

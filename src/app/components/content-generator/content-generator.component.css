@@ -1,34 +1,109 @@
 :host {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: olivedrab;
-  color: rgba(0, 0, 0, .6);
+  height: 100%;
+  width: 100%;
+  color: white;
 }
+
 
 .container {
-  padding: 15px;
-  border: 2px solid black;
-  border-radius: 20px;
-  background-color: rgb(180, 213, 115);
-  box-shadow: 0px 2px 2px;
-}
-
-.wrapper {
-  width: 650px;
-  margin: 0 auto;
+  border: 3px solid #565B62;
+  border-radius: 5px;
+  position: relative;
+  top: -2px;
+  padding: 35px 20px 10px;
 }
 
 .title {
   font-size: 25px;
   padding: 15px 0;
   font-weight: bold;
+  text-align: center;
 }
 
-.raw{
-    margin: 10px 0;
+/* tabs start */
+
+.choose-block {
+  margin-left: 20px;
+}
+
+.buttons {
+  display: inline-flex;
+  align-items: flex-end;
+  transform: skewX(-15deg);
+  position: relative;
+  z-index: 10;
+}
+
+.buttons::after {
+  content: '';
+  width: 100%;
+  height: 5px;
+  margin: 0 auto;
+  background-color: #2C313A;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  z-index: -1;
+}
+
+.tabs {
+  color: white;
+  background-color: transparent;
+  border: 3px solid #565B62;
+  border-bottom: none;
+  padding: 2px 6px;
+}
+
+.tabs:hover {
+  cursor: pointer;
+}
+
+.first {
+  border-radius: 5px 0 0 0;
+}
+
+.first.active {
+  padding: 6px;
+  border-radius: 5px 5px 0 0;
+}
+
+.tabs.other {
+  border-radius: 0px 5px 0 0;
+  margin-left: -3px;
+}
+
+.other.active {
+  padding: 6px;
+  border-radius: 5px 5px 0 0;
+}
+
+/* tabs end */
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  border: 1px dashed white;
+  border-radius: 5px;
+  padding: 10px 0 18px;
+}
+
+legend {
+  margin-left: 25px;
+  padding: 0 3px;
+}
+
+span,
+label {
+  margin-right: 10px;
+}
+
+.raw {
+  display: flex;
+  align-items: center;
 }
 
 .block-item {
@@ -36,41 +111,51 @@
 }
 
 .input {
-  width: 60px;
+  width: 100px;
   padding: 2px 5px;
-  border: none;
-  border-bottom: 2px solid rgba(0, 0, 0, .6);
-  background-color: transparent;
-  color: inherit;
+  border: 2px solid transparent;
 }
 
 .input:focus {
   outline: none;
 }
 
-.sub-title {
-  font-size: 18px;
-  font-weight: bold;
+.block-btn {
+  display: flex;
+  justify-content: center;
 }
 
-.style-block{
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
+select {
+  width: 132px;
+  padding: 2px 5px;
 }
 
-.select-item{
-    width: 100px;
-    display: inline-block;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: rgb(133, 232, 143);
-    border-color: rgb(44, 235, 64);
+select:focus,
+input:focus {
+  outline: none;
+  box-shadow: 0 0 2px 3px #3B6EBA;
 }
-.select-item:focus{
-    box-shadow: 0px 0px 4px 4px rgba(44, 235, 64, .6);
-    outline: none;
+
+.input-box {
+  position: relative;
+  display: inline-block;
 }
-.btn{
-  background-color: rgb(216, 177, 105);
+
+.hint {
+  position: absolute;
+  top: -58px;
+  left: 0;
+  z-index: 100;
+}
+
+.input.ng-invalid.ng-dirty {
+  border: 2px solid red;
+}
+
+.input.ng-valid.ng-dirty {
+  border: 2px solid green;
+}
+
+.empty {
+  border: 2px solid red;
 }

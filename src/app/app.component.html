@@ -1,4 +1,7 @@
-<app-main-text></app-main-text>
-<app-tools-controller (message)="getConfig($event)"></app-tools-controller>
-<app-editor-field [control]="config">
-</app-editor-field>
+<div class="container">
+    <app-main-text></app-main-text>
+    <app-tools-controller (message)="getConfig($event)" (lock)="setLock()"></app-tools-controller>
+    <app-editor-field [control]="config">
+    </app-editor-field>
+</div>
+<app-lock *ngIf="lock" (unlock)="unlock()"></app-lock>

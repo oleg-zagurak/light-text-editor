@@ -1,0 +1,13 @@
+input{
+    padding: 2px;
+    border-width: 2px;
+    border-style: solid;
+    background-color: transparent;
+}
+input:focus{
+    outline: 2px solid transparent;
+    box-shadow: 0 0 2px 3px #3B6EBA;
+}
+input:hover{
+    cursor: pointer;
+}

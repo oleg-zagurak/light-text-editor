@@ -4,33 +4,49 @@
   left: 0;
   width: 100%;
   height: 300px;
-  padding: 15px 0;
+  padding: 15px 30px;
 }
 
-form {
+.flex {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
   width: 455px;
   margin: 0 auto;
 }
 
-.radio {
-  margin-bottom: 15px;
-}
-
-.radio span {
-  margin-right: 10px;
-}
-
-.font {
+.item {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 5px;
+}
+
+legend {
+  margin-left: 30px;
+  color: white;
+  padding: 0 5px;
+}
+
+fieldset {
+  width: 100%;
+  border: 1px dashed white;
+  border-radius: 10px;
+  padding: 10px 0 20px;
+  color: white;
+}
+
+.indent {
   margin-bottom: 15px;
 }
 
-.font select {
-  width: 200px;
+select{
+  padding: 2px;
+  border-radius: 5px;
 }
-
 .config label {
   margin-right: 10px;
 }
@@ -45,17 +61,18 @@ form {
   background-color: rgb(216, 177, 105);
 }
 
-.colors{
+.colors {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-.cell{
+.cell {
   width: 50px;
   height: 50px;
   border: 4px solid black;
 }
-.cell:hover{
+
+.cell:hover {
   cursor: pointer;
 }

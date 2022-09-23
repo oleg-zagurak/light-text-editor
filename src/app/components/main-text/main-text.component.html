@@ -1,10 +1,12 @@
-<div class="container">
-    <div class="text-block border border-2 rounded-4 border-dark" [style.backgroundColor]="styles.bgColor">
-        <p class="text" [innerHTML]="text" 
-        [style.fontSize.pt]="styles.size"
-        [style.fontFamily]="styles.font !== '' ? styles.font : ''"
-        [style.color]="styles.color"
-        [style.fontWeight]="styles.bold ? 'bold' : 'normal'"
-        [style.fontStyle]="styles.italic ? 'italic' : 'normal'"></p>
-    </div>
+<div class="text-block">
+        <div class="text"
+            [innerHTML]="text" id="box"
+            [style.fontSize.px]="styles.size"
+            [style.fontFamily]="styles.font"
+            [style.color]="styles.color"
+            [style.fontWeight]="styles.bold ? 'bold' : 'normal'"
+            [style.fontStyle]="styles.italic ? 'italic' : 'normal'"
+            [style.backgroundColor]="styles.bgColor"
+            [style.textDecoration]="styles.underline ? 'underline' : 'none'">
+        </div>
 </div>

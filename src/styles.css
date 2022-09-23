@@ -1,26 +1,43 @@
-*, *::after, *::before{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    padding: 15px 0;
-    background-color: olivedrab;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    position: relative;
-}
-::-webkit-scrollbar{
-    background-color: transparent;
-    border-radius: 20px;
-    width: 10px;
-}
-::-webkit-scrollbar-button{
-    height: 5px;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-::-webkit-scrollbar-thumb{
-    background-color: rgba(0, 0, 0, .35);
-    border-radius: inherit;
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+body {
+  padding: 15px 0;
+  background-color: #6F6F7B;
+  height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  border-radius: 20px;
+  width: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+::-webkit-scrollbar-button {
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .35);
+  border-radius: 10px;
+}
+
+ol, ul {
+  padding: 10px 0;
+  padding-left: 2rem;
 }

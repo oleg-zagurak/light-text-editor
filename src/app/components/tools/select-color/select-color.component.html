@@ -1,0 +1,2 @@
+<input #color type="color" name="" id="" [value]="colorValue" (click)="setValue($event)" (keyup)="keyColorChange($event, color)"
+(focus)="setFocus(true, color)" (blur)="setFocus(false, color)" [ngStyle]="inputStyles" [style.borderColor]="colorValue">

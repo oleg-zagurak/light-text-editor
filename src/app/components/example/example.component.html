@@ -1,0 +1,20 @@
+<div class="example-block">
+    <app-button class="example-btn" (click)="showExample()">Подивитись на приклад</app-button>
+    <ng-template [ngIf]="status" [ngIfElse]="sub">
+        <div class="example">
+            <div class="bar">
+                <button (click)="status = !status"></button>
+            </div>
+            <div class="main" [innerHTML]="text"> 
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #sub>
+        <div class="sub-example">
+            <div class="icon" (click)="status = !status">
+                <img src="./../../../assets/icon.svg">
+                <button>Показати приклад</button>
+            </div>
+        </div>
+    </ng-template>
+</div>

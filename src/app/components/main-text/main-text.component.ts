@@ -10,10 +10,10 @@ import { StyleConfigService } from 'src/app/shared/style-config.service';
   styleUrls: ['./main-text.component.css']
 })
 export class MainTextComponent implements OnInit, DoCheck {
-  public text!:string | SafeHtml;
+  public text!: SafeHtml;
   public styles!: any;
   constructor(private data:DataConfigService, private styleObj: StyleConfigService, private sanitizer: DomSanitizer) {
-    this.text = this.data.text;
+    this.text = this.sanitizer.bypassSecurityTrustHtml(this.data.text);
     this.styles = this.styleObj.styles;
   }
 

@@ -8,6 +8,11 @@ import { ToolsControllerComponent } from './components/tools-controller/tools-co
 import { EditorFieldComponent } from './components/editor-field/editor-field.component';
 import { EditorStylesComponent } from './components/editor-styles/editor-styles.component';
 import { ContentGeneratorComponent } from './components/content-generator/content-generator.component';
+import { ButtonComponent } from './components/tools/button/button.component';
+import { SelectColorComponent } from './components/tools/select-color/select-color.component';
+import { HintComponent } from './components/tools/hint/hint.component';
+import { ExampleComponent } from './components/example/example.component';
+import { LockComponent } from './components/lock/lock.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { ContentGeneratorComponent } from './components/content-generator/conten
     ToolsControllerComponent,
     EditorFieldComponent,
     EditorStylesComponent,
-    ContentGeneratorComponent
+    ContentGeneratorComponent,
+    ButtonComponent,
+    SelectColorComponent,
+    HintComponent,
+    ExampleComponent,
+    LockComponent
   ],
   imports: [
     BrowserModule,

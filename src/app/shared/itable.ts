@@ -1,9 +1,8 @@
 export interface Itable {
     raws: number,
-    cells: number,
+    columns: number,
     width: number,
     height: number,
-    borderW: number,
-    borderT: string,
-    borderC: string
+    borderWidth: number,
+    borderType: string
 }
